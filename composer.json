@@ -1,0 +1,21 @@
+{
+    "name": "diovanegabriel/php-utils",
+    "description": "Useful functions for PHP",
+    "type": "library",
+    "keywords": [
+        "Utils",
+        "Functions"
+    ],
+    "license": "MIT",
+    "version": "v1.0.0",
+    "authors": [
+        {
+            "name": "Diovane Barbieri Gabriel"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DBarbieri\\Utils\\": "src/"
+        }
+    }
+}
