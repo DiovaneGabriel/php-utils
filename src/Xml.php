@@ -2,7 +2,7 @@
 
 namespace DBarbieri\Utils;
 
-class XML
+class Xml
 {
     public static function createFromArray($array, $node_name = '', $replace = null)
     {
