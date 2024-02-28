@@ -59,4 +59,9 @@ class Request
     {
         return self::request($url, "POST", $data, $p_headers, $return_header, $timeout);
     }
+
+    public static function get($url, $p_headers = false, $return_header = false, $timeout = false)
+    {
+        return self::request($url, "GET", null, $p_headers, $return_header, $timeout);
+    }
 }
