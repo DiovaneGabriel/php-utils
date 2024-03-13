@@ -6,7 +6,7 @@ class Cache
 {
     const CACHE_DIR = '/tmp/cache/';
 
-    public static function getFromCache($key, $expiration = 3600)
+    public static function get($key, $expiration = 3600)
     {
         $cacheFile = self::CACHE_DIR . md5($key);
 
@@ -19,7 +19,7 @@ class Cache
         return false;
     }
 
-    public static function saveToCache($key, $data)
+    public static function save($key, $data)
     {
         if (!is_dir(self::CACHE_DIR)) {
             mkdir(self::CACHE_DIR, 0777, true);
@@ -31,7 +31,7 @@ class Cache
         file_put_contents($cacheFile, $data);
     }
 
-    public static function deleteCache($key)
+    public static function delete($key)
     {
         if (!is_dir(self::CACHE_DIR)) {
             mkdir(self::CACHE_DIR, 0777, true);
@@ -40,5 +40,18 @@ class Cache
         $cacheFile = self::CACHE_DIR . md5($key);
 
         unlink($cacheFile);
+    }
+
+    public static function deleteCache($key)
+    {
+        self::delete($key);
+    }
+    public static function saveToCache($key, $data)
+    {
+        self::save($key, $data);
+    }
+    public static function getFromCache($key, $expiration = 3600)
+    {
+        self::get($key, $expiration);
     }
 }
