@@ -30,4 +30,15 @@ class Cache
         // Salva os dados em cache
         file_put_contents($cacheFile, $data);
     }
+
+    public static function DeleteCache($key)
+    {
+        if (!is_dir(self::CACHE_DIR)) {
+            mkdir(self::CACHE_DIR, 0777, true);
+        }
+
+        $cacheFile = self::CACHE_DIR . md5($key);
+
+        unlink($cacheFile);
+    }
 }
