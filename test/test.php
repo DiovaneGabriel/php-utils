@@ -1,9 +1,7 @@
 <?php
 date_default_timezone_set('America/Sao_Paulo');
 
-use DBarbieri\Utils\Cache;
-use DBarbieri\Utils\MatematicaFinanceira;
-use DBarbieri\Utils\Str;
+use DBarbieri\Utils\Markdown;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -11,6 +9,15 @@ $markdownContent = "A few links that may also be useful:\n- [The Marketer’s Gu
 $search = "jounce-stage.s3.us-east-2.amazonaws.com";
 $newUrl = "google.com";
 
+$urls = Markdown::getUrlImages($markdownContent);
+$urls = array_filter($urls, function ($el) use ($search) {
+    return strpos($el, $search);
+});
+
+foreach ($urls as $url) {
+    $markdownContent = str_replace($url, "google.com", $markdownContent);
+}
+
 echo '<pre>';
-var_dump(Str::replaceImageUrlsMarkdown($markdownContent, $search, $newUrl));
+var_dump($markdownContent);
 die();
