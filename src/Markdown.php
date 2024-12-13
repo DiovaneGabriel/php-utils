@@ -6,7 +6,7 @@ class Markdown
 {
     public static function getUrlImages($markdownContent)
     {
-        $pattern = '/!\[([^\]]*)\]\((https?:\/\/[^\)]+)\)/i';
+        $pattern = '/\[([^\]]*)\]\((https?:\/\/[^\)]+)\)/i';
         $imageUrls = [];
 
         if (preg_match_all($pattern, $markdownContent, $matches)) {
