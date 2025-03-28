@@ -44,4 +44,30 @@ class Color
 
         return sprintf("#%02x%02x%02x", $r, $g, $b);
     }
+    
+    public static function mix(string $color1, string $color2, float $percent): string
+    {
+        $color1 = ltrim($color1, '#');
+        $color2 = ltrim($color2, '#');
+
+        // Garante que esteja entre 0 e 100
+        $percent = max(0, min(100, $percent));
+        $ratio = $percent / 100;
+
+        // Extrai canais RGB das duas cores
+        $r1 = hexdec(substr($color1, 0, 2));
+        $g1 = hexdec(substr($color1, 2, 2));
+        $b1 = hexdec(substr($color1, 4, 2));
+
+        $r2 = hexdec(substr($color2, 0, 2));
+        $g2 = hexdec(substr($color2, 2, 2));
+        $b2 = hexdec(substr($color2, 4, 2));
+
+        // Interpola os canais
+        $r = round($r1 * (1 - $ratio) + $r2 * $ratio);
+        $g = round($g1 * (1 - $ratio) + $g2 * $ratio);
+        $b = round($b1 * (1 - $ratio) + $b2 * $ratio);
+
+        return sprintf("#%02x%02x%02x", $r, $g, $b);
+    }
 }
