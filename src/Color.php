@@ -44,7 +44,7 @@ class Color
 
         return sprintf("#%02x%02x%02x", $r, $g, $b);
     }
-    
+
     public static function mix(string $color1, string $color2, float $percent): string
     {
         $color1 = ltrim($color1, '#');
@@ -69,5 +69,30 @@ class Color
         $b = round($b1 * (1 - $ratio) + $b2 * $ratio);
 
         return sprintf("#%02x%02x%02x", $r, $g, $b);
+    }
+
+    public static function hexToRgb($hex)
+    {
+        // Remove o "#" se existir
+        $hex = ltrim($hex, '#');
+
+        // Se for formato curto tipo "abc"
+        if (strlen($hex) === 3) {
+            $hex = $hex[0] . $hex[0] .
+                $hex[1] . $hex[1] .
+                $hex[2] . $hex[2];
+        }
+
+        // Se não for um hex válido, retorna null
+        if (strlen($hex) !== 6) {
+            return null;
+        }
+
+        // Converte para valores RGB
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+
+        return [$r, $g, $b];
     }
 }
